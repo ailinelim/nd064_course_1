@@ -2,7 +2,7 @@
 
 name: TechTrends - Package with Docker
 # Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the main branch
+# events but only for the master branch
 on:
   push:
     branches: [ main ]
@@ -38,7 +38,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./project/techtrends/Dockerfile
+          file:  project/techtrends/Dockerfile
           platforms: linux/amd64
           push: true
           tags: ailinelim/techtrends:latest
