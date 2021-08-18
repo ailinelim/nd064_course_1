@@ -1,11 +1,45 @@
 ## Docker commands used to build the application 
 # TODO: insert the docker build command
+docker build -f Dockerfile -t ailinelim/techtrends .
+docker tagge ailinelim/techtrends techtrends:latest
 
 ## Docker commands used to run the application
 # TODO: insert the docker run command
+docker run -d -p 7111:3111 techtrends
 
 ## Docker commands used to get the application logs
 # TODO: insert the docker logs command
+tail -f app.log
+
 
 ## Logs from the container running the TechTrends application
 # TODO: paste logs from the Docker container 
+DEBUG root [2021-08-18 00:24:03,085] : This will get logged
+INFO werkzeug [2021-08-18 00:24:03,087] :  * Running on http://0.0.0.0:3111/ (Press CTRL+C to quit)
+INFO werkzeug [2021-08-18 00:24:10,156] : 172.17.0.1 - - [18/Aug/2021 00:24:10] "GET / HTTP/1.1" 200 -
+INFO app [2021-08-18 00:24:31,234] : -Article "2020 CNCF Annual Report" retrieved!
+INFO werkzeug [2021-08-18 00:24:31,237] : 172.17.0.1 - - [18/Aug/2021 00:24:31] "GET /about HTTP/1.1" 200 -
+INFO werkzeug [2021-08-18 00:24:32,928] : 172.17.0.1 - - [18/Aug/2021 00:24:32] "GET / HTTP/1.1" 200 -
+INFO werkzeug [2021-08-18 00:24:34,572] : 172.17.0.1 - - [18/Aug/2021 00:24:34] "GET /2 HTTP/1.1" 200 -
+INFO werkzeug [2021-08-18 00:24:35,792] : 172.17.0.1 - - [18/Aug/2021 00:24:35] "GET / HTTP/1.1" 200 -
+INFO app [2021-08-18 00:24:59,085] : Metrics request successful
+INFO werkzeug [2021-08-18 00:24:59,086] : 172.17.0.1 - - [18/Aug/2021 00:24:59] "GET /metrics HTTP/1.1" 200 -
+INFO app [2021-08-18 00:25:24,934] : Healthz Status request successfull
+INFO werkzeug [2021-08-18 00:25:24,934] : 172.17.0.1 - - [18/Aug/2021 00:25:24] "GET /healthz HTTP/1.1" 200 -
+INFO app [2021-08-18 00:25:48,237] : Metrics request successful
+INFO werkzeug [2021-08-18 00:25:48,237] : 172.17.0.1 - - [18/Aug/2021 00:25:48] "GET /metrics HTTP/1.1" 200 -
+INFO app [2021-08-18 00:26:01,844] : Healthz Status request successfull
+INFO werkzeug [2021-08-18 00:26:01,845] : 172.17.0.1 - - [18/Aug/2021 00:26:01] "GET /healthz HTTP/1.1" 200 -
+INFO app [2021-08-18 00:26:09,034] : -Article "2020 CNCF Annual Report" retrieved!
+INFO werkzeug [2021-08-18 00:26:09,035] : 172.17.0.1 - - [18/Aug/2021 00:26:09] "GET /about HTTP/1.1" 200 -
+INFO werkzeug [2021-08-18 00:26:10,884] : 172.17.0.1 - - [18/Aug/2021 00:26:10] "GET / HTTP/1.1" 200 -
+INFO werkzeug [2021-08-18 00:26:15,318] : 172.17.0.1 - - [18/Aug/2021 00:26:15] "GET /create HTTP/1.1" 200 -
+INFO app [2021-08-18 00:26:33,618] : -New post title Kubernetes Community created!
+INFO werkzeug [2021-08-18 00:26:33,619] : 172.17.0.1 - - [18/Aug/2021 00:26:33] "POST /create HTTP/1.1" 302 -
+INFO werkzeug [2021-08-18 00:26:33,625] : 172.17.0.1 - - [18/Aug/2021 00:26:33] "GET / HTTP/1.1" 200 -
+INFO werkzeug [2021-08-18 00:26:38,707] : 172.17.0.1 - - [18/Aug/2021 00:26:38] "GET /7 HTTP/1.1" 200 -
+INFO app [2021-08-18 00:26:45,703] : Healthz Status request successfull
+INFO werkzeug [2021-08-18 00:26:45,704] : 172.17.0.1 - - [18/Aug/2021 00:26:45] "GET /healthz HTTP/1.1" 200 -
+INFO app [2021-08-18 00:26:49,049] : Metrics request successful
+INFO werkzeug [2021-08-18 00:26:49,050] : 172.17.0.1 - - [18/Aug/2021 00:26:49] "GET /metrics HTTP/1.1" 200 -
+INFO werkzeug [2021-08-18 00:26:56,055] : 172.17.0.1 - - [18/Aug/2021 00:26:56] "GET / HTTP/1.1" 200 -
