@@ -1,9 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: techtrends
-    tag: techtrends
   name: techtrends
   namespace: sandbox
 spec:
@@ -20,9 +17,10 @@ spec:
   template:
     metadata:
       labels:
+        app: techtrends
         tag: techtrends
-    spec:
-      containers:
+    spec:      
+     containers:
       - image: ailinelim/techtrends:latest
         imagePullPolicy: IfNotPresent
         name: techtrends
