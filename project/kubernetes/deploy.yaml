@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: techtrends
+    tag: techtrends
+  name: techtrends
+  namespace: sandbox
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: techtrends
+      tag: techtrends
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        tag: techtrends
+    spec:
+      containers:
+      - image: ailinelim/techtrends:latest
+        imagePullPolicy: IfNotPresent
+        name: techtrends
+        resources:
+          limits:
+              cpu: 500m
+              memory: 128Mi
+          requests:
+              cpu: 250m
+              memory: 64Mi
+        ports:
+        - name: liveness-port
+          containerPort: 3111
+          hostPort: 3111
+        livenessProbe:
+            httpGet:
+                path: /healthz
+                port: liveness-port
+        readinessProbe:
+            httpGet:
+                path: /healthz
+                port: liveness-port
