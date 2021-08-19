@@ -6,15 +6,12 @@ from werkzeug.exceptions import abort
 import logging
 import sys
 
-dbconn_COUNTER = 0 
 
 # Function to get a database connection.
 # This function connects to database with the name `database.db`
 def get_db_connection():
-    global dbconn_COUNTER
     connection = sqlite3.connect('database.db')
     connection.row_factory = sqlite3.Row
-    dbconn_COUNTER += 1
     return connection
 
 # Function to get a post using its ID
@@ -37,48 +34,6 @@ def index():
     posts = connection.execute('SELECT * FROM posts').fetchall()
     connection.close()
     return render_template('index.html', posts=posts)
-
-# Define status check the endpoint should return the following message
-# if HTTP 200 status code then OK healthy
-@app.route('/healthz')
-def healthz():
-    if post is None:
-        response = app.response_class(
-        response=json.dumps({"result":"ERROR - Unhealthy"}),
-            status=404,
-            mimetype='application/json'
-        )
-    else:
-        response = app.response_class(
-        response=json.dumps({"result":"OK - healthy"}), 
-            status=200, 
-            mimetype='application/json'
-        )
-
-    ## log line
-    app.logger.info('Healthz Status request successfull')
-    return response
-
-# Define Metrics checking on db connection
-@app.route('/metrics')
-def metrics():
-# Get db connection status
-    if post is None:
-        response = app.response_class(
-        response=json.dumps({"status":"ERROR - Not found"}),
-            status=500,
-            mimetype='application/json'
-        )
-    else:
-        response = app.response_class(
-        response=json.dumps({"status":"success","code":0,"data":{"db_connection_count":dbconn_COUNTER,"post_count":len(post)}}),
-            status=200,
-            mimetype='application/json'
-        )
-
-    ## log line
-    app.logger.info('Metrics request successful')
-    return response
 
 # Define how each individual article is rendered 
 # If the post ID is not found a 404 page is shown
@@ -124,15 +79,4 @@ def create():
 
 # start the application on port 3111
 if __name__ == "__main__":
-   ## stream logs to app.log file
-   logger = logging.getLogger("__name__")
-   logging.basicConfig(filename='app.log',level=logging.DEBUG, format=f'%(levelname)s %(name)s [%(asctime)s] : %(message)s')
-   logging.debug('This will get logged')
-   h1 = logging.StreamHandler(sys.stdout)
-   h1.setLevel(logging.DEBUG)
-   h2 = logging.StreamHandler(sys.stderr)
-   h2.setLevel(logging.ERROR)
-   
-   logger.addHandler(h1)
-   logger.addHandler(h2)
    app.run(host='0.0.0.0', port='3111')
